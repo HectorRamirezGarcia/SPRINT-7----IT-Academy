@@ -11,7 +11,7 @@
     <tr>
       <div class="container p-3">
         <div class="row">
-          <input class="col-1" (click)="check_checkbox('0')" type="checkbox">
+          <input class="col-1" (change)="event_checkbox($event, '0')" type="checkbox">
           <div id="check_0" class="col-11">Una pagina web (500€)</div>
         </div>
       </div>
@@ -19,7 +19,7 @@
     <tr>
       <div class="container p-3">
         <div class="row">
-          <input class="col-1" (click)="check_checkbox('1')" type="checkbox">
+          <input class="col-1" (change)="event_checkbox($event, '1')" type="checkbox">
           <div id="check_1" class="col-11">Una consultoria SEO (300€)</div>
         </div>
       </div>
@@ -27,7 +27,7 @@
     <tr>
       <div class="container p-3">
         <div class="row">
-          <input class="col-1" (click)="check_checkbox('2')" type="checkbox">
+          <input class="col-1" (change)="event_checkbox($event, '2')" type="checkbox">
           <div id="check_2" class="col-11">Una campanya de Google Ads (200€)</div>
         </div>
       </div>

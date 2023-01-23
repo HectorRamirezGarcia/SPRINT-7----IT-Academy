@@ -7,39 +7,22 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Angular_1_SPRINT_7';
-  
-  check_checkbox(id:string){
-    const option_selected = <HTMLInputElement> document.getElementById("col_"+id);
-    let price = <HTMLInputElement> document.getElementById("price");
-    if (check_clicked.checked ==  true) {
-      if (id == "0"){
-        const price_total = parseInt(price.textContent!) + parseInt();
-        price.textContent = String(price_total);
-      } 
-      if (id == "1"){
-        const price_total = parseInt(price.textContent!) + 300;
-        price.textContent = String(price_total);
-      } 
-      if (id == "2"){
-        const price_total = parseInt(price.textContent!) + 200;
-        price.textContent = String(price_total);
-      } 
-      
-    } else {
-      if (id == "0"){
-        const price_total = parseInt(price.textContent!) - 500;
-        price.textContent = String(price_total);
-      } 
-      if (id == "1"){
-        const price_total = parseInt(price.textContent!) - 300;
-        price.textContent = String(price_total);
-      } 
-      if (id == "2"){
-        const price_total = parseInt(price.textContent!) - 200;
-        price.textContent = String(price_total);
-      } 
-    } 
+  price_total = "0";
 
+  event_checkbox(event: any, id: string) {
+    const option_selected = <HTMLInputElement>document.getElementById("check_" + id);
+    const price = <HTMLInputElement>document.getElementById("price");
+    if (event.target.checked == true) {
+      this.price_total = String(parseInt(option_selected.textContent!.substring(option_selected.textContent!.length - 5, option_selected.textContent!.length - 2)) + parseInt(this.price_total)); // Calculo suma entre el precio que seleccionamos y total.
+      price.textContent = this.price_total;
+    } else {
+      this.price_total = String(parseInt(this.price_total) - parseInt(option_selected.textContent!.substring(option_selected.textContent!.length - 5, option_selected.textContent!.length - 2))); // Calculo resta entre el precio que seleccionamos y total.
+      price.textContent = this.price_total;
     }
+
   }
+}
+
+
+
 
