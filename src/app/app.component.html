@@ -7,13 +7,28 @@
   <title>SPRINT 7</title>
 </head>
 <body>
-  <table>
+  <table class="col-12">
     <tr>
       <div class="container p-3">
         <div class="row">
           <input class="col-1" (change)="event_checkbox($event, '0')" type="checkbox">
           <div id="check_0" class="col-11">Una pagina web (500€)</div>
+          
         </div>
+      </div>
+
+      <div id="card" class="card container p-4 col-12" [ngStyle]="{'display': 'none'}">
+  
+        <form [formGroup]="webform_calc" (change)="updatePriceWeb()">
+          <div class="row p-1">
+            <label for="pages">Número de páginas: </label>
+            <input id="pages" type="number" formControlName="pages">
+          </div>
+          <div class="row p-1">
+            <label for="idioms">Número de idiomas: </label>
+            <input id="idioms" type="number" formControlName="idioms">
+          </div>
+        </form>
       </div>
     </tr>
     <tr>
