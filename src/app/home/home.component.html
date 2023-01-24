@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPRINT 7</title>
+</head>
+<body>
+  <table class="col-12">
+    <tr>
+      <div class="container p-3">
+        <div class="row">
+          <input class="col-1" (change)="event_checkbox($event, '0')" type="checkbox">
+          <div id="check_0" class="col-11">Una pagina web (500€)</div>
+          
+        </div>
+      </div>
+
+      <div id="card" class="card container p-4 col-12" [ngStyle]="{'display': 'none'}">
+  
+        <form [formGroup]="webform_calc" (change)="updatePriceWeb()">
+          <div class="row p-1">
+            <label class="col-4" for="pages">Número de páginas: </label>
+            <button class="col-2 text-white" (click)="cacule('pages', '+')">+</button>
+            <input class="col-4" id="pages" type="number" formControlName="pages">
+            <button class="col-2 text-white" (click)="cacule('pages', '-')">-</button>
+          </div>
+          <div class="row p-1">
+            <label class="col-4" for="idioms">Número de idiomas: </label>
+            <button class="col-2 text-white" (click)="cacule('idioms', '+')">+</button>
+            <input class="col-4" id="idioms" type="number" formControlName="idioms">
+            <button class="col-2 text-white" (click)="cacule('idioms', '-')">-</button>
+          </div>
+        </form>
+      </div>
+    </tr>
+    <tr>
+      <div class="container p-3">
+        <div class="row">
+          <input class="col-1" (change)="event_checkbox($event, '1')" type="checkbox">
+          <div id="check_1" class="col-11">Una consultoria SEO (300€)</div>
+        </div>
+      </div>
+    </tr>
+    <tr>
+      <div class="container p-3">
+        <div class="row">
+          <input class="col-1" (change)="event_checkbox($event, '2')" type="checkbox">
+          <div id="check_2" class="col-11">Una campanya de Google Ads (200€)</div>
+        </div>
+      </div>
+    </tr>
+    <tr>
+      <div class="container col-2">
+        <div class="row total_div">
+          <div class="col-5"><strong>Price: </strong></div>
+          <div class="col-5 " id="price">0</div>
+          <div class="col-2">€</div>
+        </div>
+      </div>
+    </tr>
+  </table>
+
+</body>
+</html>

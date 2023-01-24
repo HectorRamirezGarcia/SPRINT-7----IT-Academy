@@ -4,59 +4,33 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SPRINT 7</title>
+  <title>Document</title>
 </head>
 <body>
-  <table class="col-12">
-    <tr>
-      <div class="container p-3">
-        <div class="row">
-          <input class="col-1" (change)="event_checkbox($event, '0')" type="checkbox">
-          <div id="check_0" class="col-11">Una pagina web (500€)</div>
+  <div *ngIf="join">
+    <nav class="navbar navbar-light bg-light">
+        <form class="container-fluid">
+            <h2 class="justify-content-start p-2">My Page</h2>
+            <button class="btn me-2 px-4 justify-content-end text-white" (click)="join = !join"><strong>Enjoy</strong></button>
           
-        </div>
-      </div>
-
-      <div id="card" class="card container p-4 col-12" [ngStyle]="{'display': 'none'}">
-  
-        <form [formGroup]="webform_calc" (change)="updatePriceWeb()">
-          <div class="row p-1">
-            <label for="pages">Número de páginas: </label>
-            <input id="pages" type="number" formControlName="pages">
-          </div>
-          <div class="row p-1">
-            <label for="idioms">Número de idiomas: </label>
-            <input id="idioms" type="number" formControlName="idioms">
-          </div>
         </form>
-      </div>
-    </tr>
-    <tr>
-      <div class="container p-3">
-        <div class="row">
-          <input class="col-1" (change)="event_checkbox($event, '1')" type="checkbox">
-          <div id="check_1" class="col-11">Una consultoria SEO (300€)</div>
-        </div>
-      </div>
-    </tr>
-    <tr>
-      <div class="container p-3">
-        <div class="row">
-          <input class="col-1" (change)="event_checkbox($event, '2')" type="checkbox">
-          <div id="check_2" class="col-11">Una campanya de Google Ads (200€)</div>
-        </div>
-      </div>
-    </tr>
-    <tr>
-      <div class="container">
-        <div class="row">
-          <div class="col-2">Price: </div>
-          <div class="col-2" id="price">0</div>
-          <div class="col-1">€</div>
-        </div>
-      </div>
-    </tr>
-  </table>
-
+    </nav>
+    
+    <div class="container-fluid main-content py-5">
+        <div class="card">
+            <div class="card-body text-center">
+                <h3 class="py-2"> Welcome to My Page! </h3>
+                <p class="py-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dictum nibh at condimentum condimentum. Donec non orci in libero luctus tristique. Nunc mauris velit, euismod eget nulla quis, tincidunt fringilla urna. Aenean tempus non risus ac molestie.</p>
+                <button class="btn me-2 px-4 justify-content-end text-white" (click)="join = !join"><strong>Enjoy</strong></button>
+            
+            </div>
+          </div>
+       
+    </div>
+    
+</div>
+<app-home *ngIf="!join"></app-home>
+  
 </body>
+
 </html>
