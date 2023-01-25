@@ -30,26 +30,3 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-
-body {
-    padding: 2rem;
-}
-
-tr {
-    padding: 1rem;
-}
-
-button {
-    background-color: $orange;
-    font-size: 1.4rem;
-    transition: 0.5s;
-}
-
-button:hover {
-    color: black !important;
-    border-color: rgb(94, 88, 88);
-}
-
-.card {
-    border: 2px solid black;
-}

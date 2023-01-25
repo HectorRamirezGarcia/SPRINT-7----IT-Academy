@@ -11,7 +11,7 @@
     <nav class="navbar navbar-light bg-light">
         <form class="container-fluid">
             <h2 class="justify-content-start p-2">My Page</h2>
-            <button class="btn me-2 px-4 justify-content-end text-white" (click)="join = !join"><strong>Enjoy</strong></button>
+            <button class="btn me-2 px-4 justify-content-end text-white general_button " (click)="join = !join"><strong>Enjoy</strong></button>
           
         </form>
     </nav>
@@ -21,7 +21,7 @@
             <div class="card-body text-center">
                 <h3 class="py-2"> Welcome to My Page! </h3>
                 <p class="py-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dictum nibh at condimentum condimentum. Donec non orci in libero luctus tristique. Nunc mauris velit, euismod eget nulla quis, tincidunt fringilla urna. Aenean tempus non risus ac molestie.</p>
-                <button class="btn me-2 px-4 justify-content-end text-white" (click)="join = !join"><strong>Enjoy</strong></button>
+                <button class="btn me-2 px-4 justify-content-end text-white general_button " (click)="join = !join"><strong>Enjoy</strong></button>
             
             </div>
           </div>
@@ -30,7 +30,6 @@
     
 </div>
 <app-home *ngIf="!join"></app-home>
-  
 </body>
 
 </html>

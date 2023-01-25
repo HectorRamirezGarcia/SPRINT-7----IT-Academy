@@ -18,13 +18,13 @@ tr {
     padding: 1rem;
 }
 
-button {
+.general_button {
     background-color: $orange;
     font-size: 1.4rem;
     transition: 0.5s;
 }
 
-button:hover {
+.general_button:hover {
     color: black !important;
     border-color: rgb(94, 88, 88);
     background-color: white;
@@ -37,4 +37,11 @@ button:hover {
 .total_div{
     border: 2px solid black;
     border-radius: 35px;
+}
+
+.info {
+    border: none;
+    background-color: white;
+    width: 25px;
+    height: 25px;
 }
