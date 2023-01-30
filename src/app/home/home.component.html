@@ -99,11 +99,20 @@
                 </table>
             </div>
             <div class="col-6">
+                <div class="container-fluid">
+                    <div class="row">
+                        <p>Order by : </p>
+                        <button (click)="filter('alfabetic')" class="col-3 m-3 text-white general_button">A-Z</button>
+                        <button (click)="filter('date')" class="col-3 m-3 text-white general_button">Date</button>
+                        <button (click)="filter('restart')" class="col-3 m-3 text-white general_button">Restart order</button>
+                    </div>
+                </div>
                 <div *ngFor="let user of arrForms;">
                     <div class="card my-3">
                         <div class="card-item">Nombre del presupuesto : {{user.name_form}}</div>
                         <div class="card-item">Nombre del usuario : {{user.name_user}}</div>
                         <div class="card-item">Precio : {{user.price}}</div>
+                        <div class="card-item">Fecha de subida : {{user.date}}</div>
                     </div>
                 </div>
             </div>

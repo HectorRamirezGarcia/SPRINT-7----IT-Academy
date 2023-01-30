@@ -85,5 +85,21 @@ export class HomeComponent implements OnInit {
 		this.arrForms = Forms.loadContent();
 	}
 
+	filter(type : string){
+		this.arrForms = this.arrForms.sort((a : any, b: any) => {
+			if(type == "alfabetic") {
+				if (a.name_form < b.name_form) return -1;
+				else if (a.name_form > b.name_form) return 1;
+				else return 0;
+			}
+			else if(type == "date" || type == "restart") {
+				if (a.date < b.date) return -1;
+				else if (a.date > b.date) return 1;
+				else return 0;
+			} else {
+				return 0;
+			}
+		});
+	}
 
 }
