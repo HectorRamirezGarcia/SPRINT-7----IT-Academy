@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { operator } from './operator';
+import { Forms } from './forms';
 
 @Component({
 	selector: 'app-home',
@@ -9,11 +10,21 @@ import { operator } from './operator';
 	styleUrls: ['./home.component.scss']
 })
 
+
 export class HomeComponent implements OnInit {
+	arrForms : any;
+	
 	constructor(private modalService: NgbModal) { }
 
 	title = 'Angular_1_SPRINT_7';
 	price_total = "0";
+
+	presupuesto = Array.from({length: 0}, () => ({nform : "", nuser : "", price : ""}));
+
+	user_info = new FormGroup({
+		name: new FormControl(""),
+		name_presu: new FormControl(""),
+	});
 
 	webform_calc = new FormGroup({
 		pages: new FormControl(0),
@@ -44,6 +55,13 @@ export class HomeComponent implements OnInit {
 		price.textContent = String(this.webform_calc.value.pages! * this.webform_calc.value.idioms! * 30 + parseInt(this.price_total));
 	}
 
+	update_info_user() {
+		const username = <HTMLInputElement>document.getElementById("name_f");
+		username.textContent = String(this.user_info.value.name);
+		const namepresu = <HTMLInputElement>document.getElementById("name_presu_f");
+		namepresu.textContent = String(this.user_info.value.name_presu);
+	}
+
 	cacule(type: string, oper: string) {
 		const operations = { "+": operator.add, "-": operator.sub }
 		if (oper == "+") { this.webform_calc.get(type)?.setValue(operations[oper](this.webform_calc.get(type)?.value, 1)); }
@@ -54,5 +72,18 @@ export class HomeComponent implements OnInit {
 	openModal(content: any) {
 		this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', centered: true});
 	}
+
+	addtoForms(){
+		const nform = this.user_info.value.name_presu!;
+		const nuser = this.user_info.value.name!;
+		const price = document.getElementById("price")?.textContent!;
+		Forms.addContent(nform, nuser, price);
+		this.loadtopresu();
+	}
+
+	loadtopresu() {
+		this.arrForms = Forms.loadContent();
+	}
+
 
 }

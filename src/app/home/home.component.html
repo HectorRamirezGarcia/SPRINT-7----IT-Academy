@@ -9,81 +9,110 @@
 </head>
 
 <body>
-
-    <ng-template #content1 let-modal>
-        <strong><p class="text-center pt-2" id="modal-basic-title">Este campo contiene el número de pàginas que tendra la web</p></strong>
-    </ng-template>
-
-    <ng-template #content2>
-        <strong><p class="modal-text text-center pt-2" id="modal-basic-title">Este campo contiene el número de idiomas que tendra la web</p></strong>
-    </ng-template>
-
-    <table class="col-12">
-        <tr>
-            <div class="container p-3">
-                <div class="row">
-                    <input class="col-1" (change)="event_checkbox($event, '0')" type="checkbox">
-                    <div id="check_0" class="col-11">Una pagina web (500€)</div>
-
-                </div>
+    <div class="content-fluid">
+        <div class="row">
+            <div class="col-6">
+                <ng-template #content1 let-modal>
+                    <strong><p class="text-center pt-2" id="modal-basic-title">Este campo contiene el número de pàginas que tendra la web</p></strong>
+                </ng-template>
+            
+                <ng-template #content2>
+                    <strong><p class="modal-text text-center pt-2" id="modal-basic-title">Este campo contiene el número de idiomas que tendra la web</p></strong>
+                </ng-template>
+            
+                <table class="col-12">
+                   
+                    <tr>
+                        <div class="container-fluid p-3">
+                            <div class="row">
+                                <form [formGroup]="user_info" (change)="update_info_user()">
+                                    <label class="col-6 my-1" for="name">Nombre de usuario: </label>
+                                    <input class="col-6 my-1" id="name" type="text" formControlName="name">
+                                    <label class="col-6 my-1" for="name_presu">Nombre del presupuesto: </label>
+                                    <input class="col-6 my-1" id="name_presu" type="text" formControlName="name_presu">
+                                </form>
+                            </div>
+                        </div>
+        
+                        <div class="container p-3">
+                            <div class="row">
+                                <input class="col-1" (change)="event_checkbox($event, '0')" type="checkbox">
+                                <div id="check_0" class="col-11">Una pagina web (500€)</div>
+                            </div>
+                        </div>
+            
+                        <div id="card" class="card container p-4 col-12" [ngStyle]="{'display': 'none'}">
+            
+                            <form [formGroup]="webform_calc" (change)="updatePriceWeb()">
+                                <div class="row p-1">
+                                    <label class="col-3" for="pages">Número de páginas: </label>
+                                    <button class="col-2 text-white general_button " (click)="cacule('pages', '+')">+</button>
+                                    <input class="col-3" id="pages" type="number" formControlName="pages">
+                                    <button class="col-2 text-white general_button " (click)="cacule('pages', '-')">-</button>
+                                    <button class="col-2 info mx-2" (click)="openModal(content1)"><img class="info"
+                                            src="../../assets/img/informacion.png"></button>
+            
+                                </div>
+                                <div class="row p-1">
+                                    <label class="col-3" for="idioms">Número de idiomas: </label>
+                                    <button class="col-2 text-white general_button " (click)="cacule('idioms', '+')">+</button>
+                                    <input class="col-3" id="idioms" type="number" formControlName="idioms">
+                                    <button class="col-2 text-white general_button" (click)="cacule('idioms', '-')">-</button>
+                                    <button class="col-2 info mx-2" (click)="openModal(content2)"><img class="info"
+                                            src="../../assets/img/informacion.png"></button>
+                                </div>
+                            </form>
+                        </div>
+                    </tr>
+                    <tr>
+                        <div class="container p-3">
+                            <div class="row">
+                                <input class="col-1" (change)="event_checkbox($event, '1')" type="checkbox">
+                                <div id="check_1" class="col-11">Una consultoria SEO (300€)</div>
+                            </div>
+                        </div>
+                    </tr>
+                    <tr>
+                        <div class="container p-3">
+                            <div class="row">
+                                <input class="col-1" (change)="event_checkbox($event, '2')" type="checkbox">
+                                <div id="check_2" class="col-11">Una campanya de Google Ads (200€)</div>
+                            </div>
+                        </div>
+                    </tr>
+                    <tr>
+                        <div class="container col-3">
+                            <div class="row total_div">
+                                <div class="col-5"><strong>Price: </strong></div>
+                                <div class="col-5 " id="price">0</div>
+                                <div class="col-2">€</div>
+                            </div>
+                        </div>
+                    </tr>
+                    <tr>
+                        <div class="container col-6 my-3">
+                            <div class="row">
+                              <button (click)="addtoForms()" class="text-white general_button">Save</button>
+                            </div>
+                        </div>
+                    </tr>
+                </table>
             </div>
-
-            <div id="card" class="card container p-4 col-12" [ngStyle]="{'display': 'none'}">
-
-                <form [formGroup]="webform_calc" (change)="updatePriceWeb()">
-                    <div class="row p-1">
-                        <label class="col-3" for="pages">Número de páginas: </label>
-                        <button class="col-2 text-white general_button " (click)="cacule('pages', '+')">+</button>
-                        <input class="col-3" id="pages" type="number" formControlName="pages">
-                        <button class="col-2 text-white general_button " (click)="cacule('pages', '-')">-</button>
-                        <button class="col-2 info mx-2" (click)="openModal(content1)"><img class="info"
-                                src="../../assets/img/informacion.png"></button>
-
+            <div class="col-6">
+                <div *ngFor="let user of arrForms;">
+                    <div class="card my-3">
+                        <div class="card-item">Nombre del presupuesto : {{user.name_form}}</div>
+                        <div class="card-item">Nombre del usuario : {{user.name_user}}</div>
+                        <div class="card-item">Precio : {{user.price}}</div>
                     </div>
-                    <div class="row p-1">
-                        <label class="col-3" for="idioms">Número de idiomas: </label>
-                        <button class="col-2 text-white general_button " (click)="cacule('idioms', '+')">+</button>
-                        <input class="col-3" id="idioms" type="number" formControlName="idioms">
-                        <button class="col-2 text-white general_button" (click)="cacule('idioms', '-')">-</button>
-                        <button class="col-2 info mx-2" (click)="openModal(content2)"><img class="info"
-                                src="../../assets/img/informacion.png"></button>
-                    </div>
-                </form>
-            </div>
-        </tr>
-        <tr>
-            <div class="container p-3">
-                <div class="row">
-                    <input class="col-1" (change)="event_checkbox($event, '1')" type="checkbox">
-                    <div id="check_1" class="col-11">Una consultoria SEO (300€)</div>
                 </div>
             </div>
-        </tr>
-        <tr>
-            <div class="container p-3">
-                <div class="row">
-                    <input class="col-1" (change)="event_checkbox($event, '2')" type="checkbox">
-                    <div id="check_2" class="col-11">Una campanya de Google Ads (200€)</div>
-                </div>
-            </div>
-        </tr>
-        <tr>
-            <div class="container col-2">
-                <div class="row total_div">
-                    <div class="col-5"><strong>Price: </strong></div>
-                    <div class="col-5 " id="price">0</div>
-                    <div class="col-2">€</div>
-                </div>
-            </div>
-        </tr>
-    </table>
-
+        </div>
+    </div>
+   
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
     integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc"
     crossorigin="anonymous"></script>
-
-
-
 </html>
