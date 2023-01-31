@@ -9,6 +9,7 @@
 </head>
 
 <body>
+   
     <div class="content-fluid">
         <div class="row">
             <div class="col-6">
@@ -33,10 +34,9 @@
                                 </form>
                             </div>
                         </div>
-        
                         <div class="container p-3">
                             <div class="row">
-                                <input class="col-1" (change)="event_checkbox($event, '0')" type="checkbox">
+                                <input class="col-1" id="inputPaginaWeb" (change)="event_checkbox(pageWeb, '0')" type="checkbox" #pageWeb>
                                 <div id="check_0" class="col-11">Una pagina web (500€)</div>
                             </div>
                         </div>
@@ -67,7 +67,7 @@
                     <tr>
                         <div class="container p-3">
                             <div class="row">
-                                <input class="col-1" (change)="event_checkbox($event, '1')" type="checkbox">
+                                <input class="col-1" id="inputConsultoriaSEO" (change)="event_checkbox(consultoriaSEO, '1')" type="checkbox" #consultoriaSEO>
                                 <div id="check_1" class="col-11">Una consultoria SEO (300€)</div>
                             </div>
                         </div>
@@ -75,7 +75,7 @@
                     <tr>
                         <div class="container p-3">
                             <div class="row">
-                                <input class="col-1" (change)="event_checkbox($event, '2')" type="checkbox">
+                                <input class="col-1" id="inputGoogleAds" (change)="event_checkbox(googleAds, '2')" type="checkbox" #googleAds>
                                 <div id="check_2" class="col-11">Una campanya de Google Ads (200€)</div>
                             </div>
                         </div>
@@ -102,6 +102,9 @@
                 <div class="container-fluid">
                     <div class="row">
                         <p>Order by : </p>
+                        <form [formGroup]="group_input">
+                            <input formControlName="input_NP"  placeholder="Nombre presupuesto" type="text" id="search_n" width="auto" height="auto" (change)="inputNameChange()"> Enter for search ┘
+                        </form>
                         <button (click)="filter('alfabetic')" class="col-3 m-3 text-white general_button">A-Z</button>
                         <button (click)="filter('date')" class="col-3 m-3 text-white general_button">Date</button>
                         <button (click)="filter('restart')" class="col-3 m-3 text-white general_button">Restart order</button>

@@ -10,16 +10,22 @@ import { Forms } from './forms';
 	styleUrls: ['./home.component.scss']
 })
 
-
 export class HomeComponent implements OnInit {
+	pageWeb : any;
+	consultoriaSEO : any;
+	googleAds : any;
+
 	arrForms : any;
+	arrForms_save : any;
 	
 	constructor(private modalService: NgbModal) { }
 
 	title = 'Angular_1_SPRINT_7';
 	price_total = "0";
 
-	presupuesto = Array.from({length: 0}, () => ({nform : "", nuser : "", price : ""}));
+	group_input = new FormGroup({
+		input_NP: new FormControl(""),
+	})
 
 	user_info = new FormGroup({
 		name: new FormControl(""),
@@ -31,19 +37,21 @@ export class HomeComponent implements OnInit {
 		idioms: new FormControl(0),
 	});
 
-	ngOnInit() { }
+	ngOnInit() {}
 
-	event_checkbox(event: any, id: string) {
-
+	event_checkbox(event: any, id:any) {
+		if(event.id == "inputPaginaWeb"){this.pageWeb = event.checked; }else if(event.id == "inputConsultoriaSEO"){ this.consultoriaSEO = event.checked} else if(event.id == "inputGoogleAds"){ this.googleAds = event.checked}
+		this.pageWeb = encodeURIComponent(this.pageWeb);
+		encodeURIComponent(this.consultoriaSEO);
+		encodeURIComponent(this.googleAds);
 		const option_selected = <HTMLInputElement>document.getElementById("check_" + id);
 		const price = <HTMLInputElement>document.getElementById("price");
-		if (event.target.checked == true) {
+		if (event.checked == true) {
 			document.getElementById("card")!.style.display = "block";
 			this.price_total = String(parseInt(option_selected.textContent!.substring(option_selected.textContent!.length - 5, option_selected.textContent!.length - 2)) + parseInt(this.price_total)); // Calculo suma entre el precio que seleccionamos y total.
 			price.textContent = this.price_total;
-
 		} else {
-			if (id == "0") { document.getElementById("card")!.style.display = "none"; }
+			if (this.pageWeb == false) { document.getElementById("card")!.style.display = "none"; }
 			this.price_total = String(parseInt(this.price_total) - parseInt(option_selected.textContent!.substring(option_selected.textContent!.length - 5, option_selected.textContent!.length - 2))); // Calculo resta entre el precio que seleccionamos y total.
 			price.textContent = this.price_total;
 		}
@@ -83,9 +91,11 @@ export class HomeComponent implements OnInit {
 
 	loadtopresu() {
 		this.arrForms = Forms.loadContent();
+		this.arrForms_save = Forms.loadContent();
 	}
 
 	filter(type : string){
+		let arrayDefault = this.arrForms;
 		this.arrForms = this.arrForms.sort((a : any, b: any) => {
 			if(type == "alfabetic") {
 				if (a.name_form < b.name_form) return -1;
@@ -96,10 +106,21 @@ export class HomeComponent implements OnInit {
 				if (a.date < b.date) return -1;
 				else if (a.date > b.date) return 1;
 				else return 0;
-			} else {
+			}
+			else {
 				return 0;
 			}
 		});
 	}
+
+	inputNameChange() {
+		this.arrForms = this.arrForms_save;
+		if(this.group_input.value.input_NP != "") {
+			this.arrForms = [this.arrForms.find((presu: { name_form: string | null | undefined; }) => presu.name_form === this.group_input.value.input_NP)];
+		} else {
+			this.arrForms = this.arrForms_save;
+		}
+	}
+
 
 }

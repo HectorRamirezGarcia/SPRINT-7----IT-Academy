@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -10,8 +11,13 @@ import { HomeComponent } from './home/home.component';
     HomeComponent
   ],
   imports: [
+    RouterModule.forRoot([
+			{ path: 'paginaWeb', component: HomeComponent},
+
+		]),
     BrowserModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
