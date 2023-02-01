@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -12,14 +12,14 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     RouterModule.forRoot([
-			{ path: 'paginaWeb', component: HomeComponent},
+			{ path: 'SPRINT-7/:paginaWeb:pageWeb&campañaSEO:consultoriaSEO&campañaADS:googleADS&Paginas:pages&Idiomas:idioms', component: HomeComponent},
 
 		]),
     BrowserModule,
     ReactiveFormsModule,
-    
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  
 })
 export class AppModule { }

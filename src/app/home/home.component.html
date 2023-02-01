@@ -10,7 +10,7 @@
 
 <body>
    
-    <div class="content-fluid">
+    <div class="content-fluid" [routerLink]="['/SPRINT-7/paginaWeb:'+(this.pageWeb.checked)+'&campañaSEO:'+this.consultoriaSEO.checked+'&campañaADS:'+this.googleAds.checked+'&Paginas:'+this.webform_calc.value.pages+'&Idiomas:'+this.webform_calc.value.idioms]">
         <div class="row">
             <div class="col-6">
                 <ng-template #content1 let-modal>
@@ -36,18 +36,18 @@
                         </div>
                         <div class="container p-3">
                             <div class="row">
-                                <input class="col-1" id="inputPaginaWeb" (change)="event_checkbox(pageWeb, '0')" type="checkbox" #pageWeb>
+                                <input class="col-1" id="inputPaginaWeb" [routerLink]="['/SPRINT-7/paginaWeb:'+(!this.pageWeb.checked)+'&campañaSEO:'+!this.consultoriaSEO.checked+'&campañaADS:'+!this.googleAds.checked+'&Paginas:'+this.webform_calc.value.pages+'&Idiomas:'+this.webform_calc.value.idioms]" (change)="event_checkbox(pageWeb, '0')" type="checkbox" #pageWeb>
                                 <div id="check_0" class="col-11">Una pagina web (500€)</div>
                             </div>
                         </div>
             
                         <div id="card" class="card container p-4 col-12" [ngStyle]="{'display': 'none'}">
             
-                            <form [formGroup]="webform_calc" (change)="updatePriceWeb()">
+                            <form [formGroup]="webform_calc" [routerLink]="['/SPRINT-7/paginaWeb:'+(!this.pageWeb.checked)+'&campañaSEO:'+!this.consultoriaSEO.checked+'&campañaADS:'+!this.googleAds.checked+'&Paginas:'+this.webform_calc.value.pages+'&Idiomas:'+this.webform_calc.value.idioms]" (change)="updatePriceWeb()">
                                 <div class="row p-1">
                                     <label class="col-3" for="pages">Número de páginas: </label>
                                     <button class="col-2 text-white general_button " (click)="cacule('pages', '+')">+</button>
-                                    <input class="col-3" id="pages" type="number" formControlName="pages">
+                                    <input class="col-3" value="0" id="pages" type="number" formControlName="pages" #paginas>
                                     <button class="col-2 text-white general_button " (click)="cacule('pages', '-')">-</button>
                                     <button class="col-2 info mx-2" (click)="openModal(content1)"><img class="info"
                                             src="../../assets/img/informacion.png"></button>
@@ -56,7 +56,7 @@
                                 <div class="row p-1">
                                     <label class="col-3" for="idioms">Número de idiomas: </label>
                                     <button class="col-2 text-white general_button " (click)="cacule('idioms', '+')">+</button>
-                                    <input class="col-3" id="idioms" type="number" formControlName="idioms">
+                                    <input class="col-3" value="0" id="idioms" type="number" formControlName="idioms" #idiomas>
                                     <button class="col-2 text-white general_button" (click)="cacule('idioms', '-')">-</button>
                                     <button class="col-2 info mx-2" (click)="openModal(content2)"><img class="info"
                                             src="../../assets/img/informacion.png"></button>
@@ -67,7 +67,7 @@
                     <tr>
                         <div class="container p-3">
                             <div class="row">
-                                <input class="col-1" id="inputConsultoriaSEO" (change)="event_checkbox(consultoriaSEO, '1')" type="checkbox" #consultoriaSEO>
+                                <input class="col-1" id="inputConsultoriaSEO" [routerLink]="['/SPRINT-7/paginaWeb:'+(!this.pageWeb.checked)+'&campañaSEO:'+!this.consultoriaSEO.checked+'&campañaADS:'+!this.googleAds.checked+'&Paginas:'+this.webform_calc.value.pages+'&Idiomas:'+this.webform_calc.value.idioms]" (change)="event_checkbox(consultoriaSEO, '1')" type="checkbox" #consultoriaSEO>
                                 <div id="check_1" class="col-11">Una consultoria SEO (300€)</div>
                             </div>
                         </div>
@@ -75,7 +75,7 @@
                     <tr>
                         <div class="container p-3">
                             <div class="row">
-                                <input class="col-1" id="inputGoogleAds" (change)="event_checkbox(googleAds, '2')" type="checkbox" #googleAds>
+                                <input class="col-1" id="inputGoogleAds" [routerLink]="['/SPRINT-7/paginaWeb:'+(!this.pageWeb.checked)+'&campañaSEO:'+!this.consultoriaSEO.checked+'&campañaADS:'+!this.googleAds.checked+'&Paginas:'+this.webform_calc.value.pages+'&Idiomas:'+this.webform_calc.value.idioms]" (change)="event_checkbox(googleAds, '2')" type="checkbox" #googleAds>
                                 <div id="check_2" class="col-11">Una campanya de Google Ads (200€)</div>
                             </div>
                         </div>

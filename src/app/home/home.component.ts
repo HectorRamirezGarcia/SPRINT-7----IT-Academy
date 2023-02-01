@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { operator } from './operator';
 import { Forms } from './forms';
+import { RouterModule, Routes } from '@angular/router';
 
 @Component({
 	selector: 'app-home',
@@ -10,10 +11,13 @@ import { Forms } from './forms';
 	styleUrls: ['./home.component.scss']
 })
 
+
 export class HomeComponent implements OnInit {
-	pageWeb : any;
-	consultoriaSEO : any;
-	googleAds : any;
+	@ViewChild('pageWeb', { static: true }) pageWeb: ElementRef<HTMLInputElement> | undefined;
+	@ViewChild('consultoriaSEO', { static: true }) consultoriaSEO: ElementRef<HTMLInputElement> | undefined;
+	@ViewChild('googleAds', { static: true }) googleAds: ElementRef<HTMLInputElement> | undefined;
+	@ViewChild('paginas', { static: true }) paginas: ElementRef<HTMLInputElement> | undefined;
+	@ViewChild('idiomas', { static: true }) idiomas: ElementRef<HTMLInputElement> | undefined;
 
 	arrForms : any;
 	arrForms_save : any;
@@ -40,10 +44,6 @@ export class HomeComponent implements OnInit {
 	ngOnInit() {}
 
 	event_checkbox(event: any, id:any) {
-		if(event.id == "inputPaginaWeb"){this.pageWeb = event.checked; }else if(event.id == "inputConsultoriaSEO"){ this.consultoriaSEO = event.checked} else if(event.id == "inputGoogleAds"){ this.googleAds = event.checked}
-		this.pageWeb = encodeURIComponent(this.pageWeb);
-		encodeURIComponent(this.consultoriaSEO);
-		encodeURIComponent(this.googleAds);
 		const option_selected = <HTMLInputElement>document.getElementById("check_" + id);
 		const price = <HTMLInputElement>document.getElementById("price");
 		if (event.checked == true) {
@@ -51,7 +51,7 @@ export class HomeComponent implements OnInit {
 			this.price_total = String(parseInt(option_selected.textContent!.substring(option_selected.textContent!.length - 5, option_selected.textContent!.length - 2)) + parseInt(this.price_total)); // Calculo suma entre el precio que seleccionamos y total.
 			price.textContent = this.price_total;
 		} else {
-			if (this.pageWeb == false) { document.getElementById("card")!.style.display = "none"; }
+			if (this.pageWeb!.nativeElement.checked == false) { document.getElementById("card")!.style.display = "none"; }
 			this.price_total = String(parseInt(this.price_total) - parseInt(option_selected.textContent!.substring(option_selected.textContent!.length - 5, option_selected.textContent!.length - 2))); // Calculo resta entre el precio que seleccionamos y total.
 			price.textContent = this.price_total;
 		}
@@ -121,6 +121,5 @@ export class HomeComponent implements OnInit {
 			this.arrForms = this.arrForms_save;
 		}
 	}
-
 
 }
