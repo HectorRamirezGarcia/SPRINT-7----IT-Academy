@@ -95,7 +95,6 @@ export class HomeComponent implements OnInit {
 	}
 
 	filter(type : string){
-		let arrayDefault = this.arrForms;
 		this.arrForms = this.arrForms.sort((a : any, b: any) => {
 			if(type == "alfabetic") {
 				if (a.name_form < b.name_form) return -1;
