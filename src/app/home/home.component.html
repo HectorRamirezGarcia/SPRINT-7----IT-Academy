@@ -26,11 +26,13 @@
                     <tr>
                         <div class="container-fluid p-3">
                             <div class="row">
-                                <form [formGroup]="user_info" (change)="update_info_user()">
+                                <form [formGroup]="user_info">
                                     <label class="col-6 my-1" for="name">Nombre de usuario: </label>
-                                    <input class="col-6 my-1" id="name" type="text" formControlName="name">
+                                    <input class="col-6 my-1" id="name" name="name" type="text" formControlName="name" #name required>
+                                    <div *ngIf="user_info.controls['name'].errors" class="col-12 text-end text-danger">Nombre de usuario no valido !</div>
                                     <label class="col-6 my-1" for="name_presu">Nombre del presupuesto: </label>
-                                    <input class="col-6 my-1" id="name_presu" type="text" formControlName="name_presu">
+                                    <input class="col-6 my-1" id="name_presu" name="name_presu" type="text" formControlName="name_presu" #name_presu>
+                                    <div *ngIf="user_info.controls['name_presu'].errors" class="col-12 text-end text-danger">Nombre presupuesto no valido !</div>
                                 </form>
                             </div>
                         </div>
@@ -47,7 +49,7 @@
                                 <div class="row p-1">
                                     <label class="col-3" for="pages">Número de páginas: </label>
                                     <button class="col-2 text-white general_button " (click)="cacule('pages', '+')">+</button>
-                                    <input class="col-3" value="0" id="pages" type="number" formControlName="pages" #paginas>
+                                    <input class="col-3" value="0" id="pages" type="number" formControlName="pages" #paginas required min="1">
                                     <button class="col-2 text-white general_button " (click)="cacule('pages', '-')">-</button>
                                     <button class="col-2 info mx-2" (click)="openModal(content1)"><img class="info"
                                             src="../../assets/img/informacion.png"></button>
@@ -56,7 +58,7 @@
                                 <div class="row p-1">
                                     <label class="col-3" for="idioms">Número de idiomas: </label>
                                     <button class="col-2 text-white general_button " (click)="cacule('idioms', '+')">+</button>
-                                    <input class="col-3" value="0" id="idioms" type="number" formControlName="idioms" #idiomas>
+                                    <input class="col-3" value="0" id="idioms" type="number" formControlName="idioms" #idiomas required min="1">
                                     <button class="col-2 text-white general_button" (click)="cacule('idioms', '-')">-</button>
                                     <button class="col-2 info mx-2" (click)="openModal(content2)"><img class="info"
                                             src="../../assets/img/informacion.png"></button>
@@ -79,6 +81,8 @@
                                 <div id="check_2" class="col-11">Una campanya de Google Ads (200€)</div>
                             </div>
                         </div>
+
+                        <div *ngIf="!this.pageWeb.checked" class="col-12 text-center text-danger py-3">Haz click en un check!</div>
                     </tr>
                     <tr>
                         <div class="container col-3">
@@ -103,15 +107,17 @@
                     <div class="row">
                         <p>Order by : </p>
                         <form [formGroup]="group_input">
-                            <input formControlName="input_NP"  placeholder="Nombre presupuesto" type="text" id="search_n" width="auto" height="auto" (change)="inputNameChange()"> Enter for search ┘
+                            <input formControlName="input_NP"  placeholder="Nombre presupuesto" type="text" id="search_n" width="auto" height="auto">
+                            <button (click)="inputNameChange()" class="col-1 m-3 border text-white bg-transparent border-white text-start"><img src="https://cdn0.iconfinder.com/data/icons/very-basic-2-android-l-lollipop-icon-pack/24/search-512.png" width="25px" height="25px"></button>
                         </form>
                         <button (click)="filter('alfabetic')" class="col-3 m-3 text-white general_button">A-Z</button>
                         <button (click)="filter('date')" class="col-3 m-3 text-white general_button">Date</button>
                         <button (click)="filter('restart')" class="col-3 m-3 text-white general_button">Restart order</button>
+                        <div *ngIf="this.error == true" class="col-12 text-center text-danger py-3">No existe el nombre que has introducido, por favor escriba otro nombre de presupuesto</div>
                     </div>
                 </div>
                 <div *ngFor="let user of arrForms;">
-                    <div class="card my-3">
+                    <div *ngIf="this.error == false" class="card my-3">
                         <div class="card-item">Nombre del presupuesto : {{user.name_form}}</div>
                         <div class="card-item">Nombre del usuario : {{user.name_user}}</div>
                         <div class="card-item">Precio : {{user.price}}</div>
