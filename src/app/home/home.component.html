@@ -28,11 +28,11 @@
                             <div class="row">
                                 <form [formGroup]="user_info">
                                     <label class="col-6 my-1" for="name">Nombre de usuario: </label>
-                                    <input class="col-6 my-1" id="name" name="name" type="text" formControlName="name" #name required>
-                                    <div *ngIf="user_info.controls['name'].errors" class="col-12 text-end text-danger">Nombre de usuario no valido !</div>
+                                        <input mdbValidate mdbInput class="col-6 my-1" id="name" name="name" type="text" formControlName="name" #name required>
+                                    <div class="text-danger text-end" *ngIf="user_info.controls['name'].errors && (user_info.controls['name'].dirty || user_info.controls['name'].touched)">Nombre de usuario no valido !</div>
                                     <label class="col-6 my-1" for="name_presu">Nombre del presupuesto: </label>
                                     <input class="col-6 my-1" id="name_presu" name="name_presu" type="text" formControlName="name_presu" #name_presu>
-                                    <div *ngIf="user_info.controls['name_presu'].errors" class="col-12 text-end text-danger">Nombre presupuesto no valido !</div>
+                                    <div class="text-danger text-end" *ngIf="user_info.controls['name_presu'].errors && (user_info.controls['name_presu'].dirty || user_info.controls['name_presu'].touched)" class="col-12 text-end text-danger">Nombre presupuesto no valido !</div>
                                 </form>
                             </div>
                         </div>
@@ -82,7 +82,7 @@
                             </div>
                         </div>
 
-                        <div *ngIf="!this.pageWeb.checked && !this.consultoriaSEO.checked && !this.googleAds.checked" class="col-12 text-center text-danger py-3">Haz click en un check!</div>
+                        <div *ngIf="this.div_check_error == true && !this.pageWeb.checked" class="col-12 text-center text-danger py-3">Haz click en un check!</div>
                     </tr>
                     <tr>
                         <div class="container col-3">

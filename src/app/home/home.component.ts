@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { operator } from './operator';
 import { Forms } from './forms';
@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
 	@ViewChild('googleAds', { static: true }) googleAds: ElementRef<HTMLInputElement> | undefined;
 	@ViewChild('paginas', { static: true }) paginas: ElementRef<HTMLInputElement> | undefined;
 	@ViewChild('idiomas', { static: true }) idiomas: ElementRef<HTMLInputElement> | undefined;
+	
 
 	//Variables
 	title = 'Angular_1_SPRINT_7';
@@ -26,32 +27,42 @@ export class HomeComponent implements OnInit {
 	arrForms : any;
 	arrForms_save : any;
 	error : boolean | undefined;
+	div_check_error : boolean | undefined;
+
+	group_input : FormGroup;
+	user_info : FormGroup;
+	webform_calc : FormGroup;
 	
-	constructor(private modalService: NgbModal) { this.error = false;}
+	constructor(private modalService: NgbModal) {
+		this.group_input = new FormGroup({
+			input_NP: new FormControl(""),
+		});
+		this.user_info = new FormGroup({
+			name: new FormControl("", [
+				Validators.required,
+				Validators.minLength(1),
+			]),
+			name_presu: new FormControl("", [
+				Validators.required,
+				Validators.minLength(1),
+			]),
+		});
+		this.webform_calc = new FormGroup({
+			pages: new FormControl(0),
+			idioms: new FormControl(0),
+		});
+		this.error = false;
+	}
 
-	group_input = new FormGroup({
-		input_NP: new FormControl(""),
-	})
-
-	user_info = new FormGroup({
-		name: new FormControl("", [
-			Validators.required,
-			Validators.minLength(1),
-		]),
-		name_presu: new FormControl("", [
-			Validators.required,
-			Validators.minLength(1),
-		]),
-	});
-
-	webform_calc = new FormGroup({
-		pages: new FormControl(0),
-		idioms: new FormControl(0),
-	});
+	get name(): AbstractControl {
+		return this.user_info.get('name')!;
+	}
+	
 
 	ngOnInit() {}
 
 	event_checkbox(event: any, id:any) {
+		this.div_check_error = true;
 		const price = <HTMLInputElement>document.getElementById("price");
 		if (event.checked == true) {
 			document.getElementById("card")!.style.display = "block";
