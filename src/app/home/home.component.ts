@@ -23,11 +23,12 @@ export class HomeComponent implements OnInit {
 	//Variables
 	title = 'Angular_1_SPRINT_7';
 	price_total = 0;
-	array_Prices = [{id: 1, price: 500}, {id:2, price: 300}, {id: 3, price: 200}];
+	array_Prices = [{id: 0, price: 500}, {id:1, price: 300}, {id: 2, price: 200}];
 	arrForms : any;
 	arrForms_save : any;
 	error : boolean | undefined;
 	div_check_error : boolean | undefined;
+	repeats : boolean | undefined;
 
 	group_input : FormGroup;
 	user_info : FormGroup;
@@ -54,9 +55,6 @@ export class HomeComponent implements OnInit {
 		this.error = false;
 	}
 
-	get name(): AbstractControl {
-		return this.user_info.get('name')!;
-	}
 	
 
 	ngOnInit() {}
@@ -65,11 +63,17 @@ export class HomeComponent implements OnInit {
 		this.div_check_error = true;
 		const price = <HTMLInputElement>document.getElementById("price");
 		if (event.checked == true) {
-			document.getElementById("card")!.style.display = "block";
+			if (this.pageWeb!.nativeElement.checked == true) { 
+				document.getElementById("card")!.style.display = "block";
+			}
 			this.price_total += this.array_Prices[id].price;
 			price.textContent = String(this.price_total);
 		} else {
-			if (this.pageWeb!.nativeElement.checked == false) { document.getElementById("card")!.style.display = "none"; }
+			if (this.pageWeb!.nativeElement.checked == false) { 
+				this.webform_calc.value.pages = 0; 
+				this.webform_calc.value.idioms = 0; 
+				document.getElementById("card")!.style.display = "none"; 
+			}
 			this.price_total -= this.array_Prices[id].price;
 			price.textContent = String(this.price_total);
 		}
@@ -97,6 +101,9 @@ export class HomeComponent implements OnInit {
 			Forms.addContent(this.user_info.value.name_presu!, this.user_info.value.name!, document.getElementById("price")?.textContent!);
 			this.loadtopresu();
 		}
+		this.error = false;
+		this.repeats = Forms.repeats;
+		console.log(this.repeats)
 	}
 
 	loadtopresu() {
@@ -124,6 +131,7 @@ export class HomeComponent implements OnInit {
 	}
 
 	inputNameChange() {
+		this.repeats = false;
 		this.arrForms = this.arrForms_save;
 		try {
 			if(this.group_input.value.input_NP != "") {
@@ -135,6 +143,7 @@ export class HomeComponent implements OnInit {
 				}
 				
 			} else {
+				this.error = false;
 				this.arrForms = this.arrForms_save;
 			}
 

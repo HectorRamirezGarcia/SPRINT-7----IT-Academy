@@ -82,7 +82,7 @@
                             </div>
                         </div>
 
-                        <div *ngIf="this.div_check_error == true && !this.pageWeb.checked" class="col-12 text-center text-danger py-3">Haz click en un check!</div>
+                        <div *ngIf="this.div_check_error == true && !this.pageWeb.checked && !this.consultoriaSEO.checked && !this.googleAds.checked" class="col-12 text-center text-danger py-3">Haz click en un check!</div>
                     </tr>
                     <tr>
                         <div class="container col-3">
@@ -114,6 +114,7 @@
                         <button (click)="filter('date')" class="col-3 m-3 text-white general_button">Date</button>
                         <button (click)="filter('restart')" class="col-3 m-3 text-white general_button">Restart order</button>
                         <div *ngIf="this.error == true" class="col-12 text-center text-danger py-3">No existe el nombre que has introducido, por favor escriba otro nombre de presupuesto</div>
+                        <div *ngIf="this.repeats == true" class="col-12 text-center text-danger py-3">Ya existe este presupuesto en la lista introduzca uno nuevo</div>
                     </div>
                 </div>
                 <div *ngFor="let user of arrForms;">
